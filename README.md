@@ -1,6 +1,6 @@
 # ATTP API - by Samziinwins
 
-API base que gera Sticker/gif animados com texto RGBl
+API base que gera Sticker/gif animados com texto RGB
 
 ## Como usar
 
