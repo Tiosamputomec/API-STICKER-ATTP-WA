@@ -2,7 +2,7 @@
   "name": "attp-api",
   "version": "1.0.0",
   "description": "API de GIF animado com texto (ATTP) - by Samziinwins",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
     "start": "node index.js"
   },
