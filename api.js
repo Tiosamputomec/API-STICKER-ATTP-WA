@@ -1,4 +1,3 @@
-// api.js
 const express = require('express');
 const { createCanvas } = require('canvas');
 const GIFEncoder = require('gif-encoder-2');
@@ -6,38 +5,36 @@ const GIFEncoder = require('gif-encoder-2');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Função para gerar cores do arco-íris (efeito RGB)
+// генерирует RGB
 function rainbowColor(frame, totalFrames) {
   const hue = Math.round((360 / totalFrames) * frame);
   return `hsl(${hue}, 100%, 50%)`;
 }
 
 app.get('/attp', (req, res) => {
-  const text = req.query.text || 'Digite um texto';
+  const text = req.query.text || 'Type here:';
   const width = 512;
   const height = 512;
-  const totalFrames = 30; // 30 frames para uma animação suave
+  const totalFrames = 30; 
 
-  // Configura o encoder de GIF
   const encoder = new GIFEncoder(width, height, 'neuquant', true);
-  encoder.setDelay(50); // Delay entre os frames (em ms)
-  encoder.setRepeat(0); // 0 para loop infinito
+  encoder.setDelay(50); 
+  encoder.setRepeat(0); 
   encoder.start();
 
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
-  // Desenha cada frame da animação
+  // Нарисуйте анимацию
   for (let i = 0; i < totalFrames; i++) {
-    ctx.clearRect(0, 0, width, height); // Limpa o canvas
+    ctx.clearRect(0, 0, width, height);
 
-    // Configurações da fonte
-    ctx.font = 'bold 70px "Comic Sans MS"'; // Você pode testar outras fontes
+    // шрифт
+    ctx.font = 'bold 70px "Comic Sans MS"';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = rainbowColor(i, totalFrames); // Aplica a cor do arco-íris
+    ctx.fillStyle = rainbowColor(i, totalFrames);
 
-    // Desenha o texto quebrando as linhas
     wrapText(ctx, text, width / 2, height / 2, 480, 80);
 
     encoder.addFrame(ctx);
@@ -45,13 +42,11 @@ app.get('/attp', (req, res) => {
 
   encoder.finish();
 
-  // Envia o GIF como resposta
   const buffer = encoder.out.getData();
   res.set('Content-Type', 'image/gif');
   res.send(buffer);
 });
 
-// Função auxiliar para quebrar o texto em várias linhas se for muito longo
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
   const words = text.split(' ');
   let line = '';
