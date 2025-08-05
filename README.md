@@ -1,2 +1,2 @@
-# API-STICKER-ATTP-WA
-API to generate RGB text for WhatsApp bot!
+# API-STICKER-ATTP
+API to generate RGB text for bots!
